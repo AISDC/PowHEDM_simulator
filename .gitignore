@@ -3,8 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 test.ipynb
-in_grain_files/
 P_powHEDM.pptx
+n1000000-id1.tess.orientations.csv
 
 # C extensions
 *.so
