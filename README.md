@@ -32,7 +32,10 @@ Before using this script, ensure you have the following dependencies installed:
 - pymatgen
 - mp_api
 
-<ins> **NOTE** </ins> : The MIDAS installation path is hardcoded in the configuration file. Please change the path to the correct path for your system.
+<ins> **NOTE** </ins> :
+- A 'default_config.json' file is provided in the root directory. Simulation engine used this by default. For your simulations, modify this file or create a copy of this file (Recommended) with the desired parameters.
+- The MIDAS installation path is hardcoded in the configuration file. Please change the path to the correct path for your system.
+- Make sure you have a valid Materials Project API key. Go to [https://next-gen.materialsproject.org/api] and create an account to get the API key.
 
 <hr />
 
