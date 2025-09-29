@@ -2,6 +2,11 @@
 __pycache__/
 *.py[cod]
 *$py.class
+test.ipynb
+temp_sim/
+P_powHEDM.pptx
+~$P_powHEDM.pptx
+debug
 
 # C extensions
 *.so
