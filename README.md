@@ -39,7 +39,8 @@ Run the powHEDM_sim/main.py script to run the simulation engine.
 ```bash
 python PowHEDM_sim/main.py \
     -projName <project_name> \
-    -mp_apikey <materials_project_api_key>
+    -mp_apikey <materials_project_api_key> \
+    -nr_frames <number_of_frames>
 ```
 
 ## Command Line Arguments
@@ -65,4 +66,88 @@ python PowHEDM_sim/main.py \
 | `-clearGrainDump` | `str` | `"yes"` | Clear grain dump directory after simulation (`"yes"`/`"no"`) |
 | `-saveHdf5` | `str` | `"no"` | Save output as HDF5 file (`"yes"`/`"no"`) |
 | `-saveNpz` | `str` | `"yes"` | Save output as compressed NPZ file (`"yes"`/`"no"`) |
+
+<hr />
+
+## Configuration File
+
+The configuration file is a JSON file that contains the configuration for the simulation engine. It is used to specify the experimental conditions for the simulation.
+
+```json
+{
+    "MIDAS_INSTALL_PATH": "/Users/dbeniwal/MIDAS/",
+    "materials_pool": {
+        "oxides": [
+            "SiO2", "Li2O", "Al2O3", "TiO2", "CeO2", "ZrO2", "NiO", "Fe2O3"
+        ],
+        "metals": [
+            "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Zr", "Nb", "Mo", "Pd", "Ag", "Ta", "W", "Re", "Pt", "Au"
+        ]
+    },
+    "nr_materials": {"min": 1, "max": 2},
+    "material_types": ["oxides", "metals"],
+    "hedm_always_present": "yes",
+    "powder_always_present": "yes",
+    "bkg_always_present": "yes",
+    "detector": {"NrPixels": 2048, "px": 200},
+    "exp_range": {
+        "Wavelength": {"min": 0.35, "max": 0.13},
+        "Lsd": {"min": 0.7e6, "max": 1.2e6},
+        "BC_Ypx_offset": {"min": -100, "max": 100},
+        "BC_Zpx_offset": {"min": -100, "max": 100},
+        "tx": {"min": -1, "max": 1},
+        "ty": {"min": -1, "max": 1},
+        "tz": {"min": -1, "max": 1},
+        "p0": {"min": -1e-5, "max": 1e-5},
+        "p1": {"min": -1e-4, "max": 1e-4},
+        "p2": {"min": -1e-3, "max": 1e-3},
+        "p3": {"min": 150, "max": 150},
+        "RhoD": {"min": 297006.636, "max": 297006.636},
+        "EResolution": {"min": 0.0, "max": 0.0001},
+        "nScans": {"min": 1, "max": 1},
+        "ring_thresh": {"min": 0, "max": 60},
+        "beamstop_radius": {"min": 0, "max": 100},
+        "beamstop_transmission_frac": {"min": 0, "max": 0.3}
+    },
+    "mat_specific_range": {
+        "GaussWidth": {"min": 1.3, "max": 1.7}
+    },
+    "hedm_range": {
+        "NrGrains": {"min": 500.0, "max": 10000.0},
+        "MaxIntensity": {"min": 1e3, "max": 3e3},
+        "OmegaStart": {"min": -3, "max": -3},
+        "OmegaEnd": {"min": 3, "max": 3},
+        "OmegaStep": {"min": 0.25, "max": 0.25}
+    },
+    "powder_range": {
+        "NrGrains": {"min": 1e6, "max": 1e6},
+        "MaxIntensity": {"min": 1e3, "max": 3e3},
+        "OmegaStart": {"min": -10, "max": 10},
+        "OmegaEnd": {"min": -10, "max": 10},
+        "OmegaStep": {"min": 2, "max": 2},
+        "scale_max_intensity": {"min": 2000, "max": 4000}
+    },
+    "bkg": {
+        "thomson": {
+            "scale_Imax": {"min": 10, "max": 100},
+            "form_factor_decay": {"min": 0.1, "max": 0.6}
+        },
+        "compton": {
+            "scale_Imax": {"min": 10, "max": 100}
+        },
+        "poisson": {
+            "scale_Imax": {"min": 10, "max": 100}
+        },
+        "gaussian": {
+            "scale_Imax": {"min": 10, "max": 100},
+            "loc": {"min": 5, "max": 20},
+            "scale": {"min": 2, "max": 6}
+        }
+    }
+}
+```
+
+<hr />
+
+## Output
 
