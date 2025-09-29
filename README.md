@@ -82,4 +82,7 @@ A default configuration file is provided in the root directory as "default_confi
 <hr />
 
 ## Output
+If the `-saveHdf5` argument is set to `"yes"`, the output will be saved in the project directory as "powHEDM_frames.h5" file.
+
+If the `-saveNpz` argument is set to `"yes"`, the output will be saved in the project directory as "powHEDM_frames.npz" file.
 
