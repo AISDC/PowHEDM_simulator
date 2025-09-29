@@ -54,13 +54,13 @@ python PowHEDM_sim/main.py \
 | `-projName` | `str` | Project name (used as output directory name). This directory will be created in the current working directory. |
 | `-mp_apikey` | `str` | Materials Project API key for crystal structure data |
 | `-nr_frames` | `int` | Number of diffraction frames to generate |
-| `-configFile` | `str` | `"default_config.json"` | Path to configuration file |
-| `-grainFile` | `str` | `"path/to/grain/file.csv"` | Path to grain orientations file |
 
 ### Optional Arguments
 
 | Argument | Type | Default | Description |
 |----------|------|---------|-------------|
+| `-configFile` | `str` | `"default_config.json"` | Path to configuration file |
+| `-grainFile` | `str` | `"in_grain_files/n1000000-id1.tess.orientations.csv"` | Path to grain orientations file |
 | `-maxFramesPerSim` | `int` | `1` | Maximum omega frames per simulation |
 | `-clearZarrDump` | `str` | `"yes"` | Clear zarr dump directory after simulation (`"yes"`/`"no"`) |
 | `-clearHKLDump` | `str` | `"yes"` | Clear HKL dump directory after simulation (`"yes"`/`"no"`) |
