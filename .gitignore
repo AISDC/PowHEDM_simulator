@@ -7,6 +7,7 @@ temp_sim/
 P_powHEDM.pptx
 ~$P_powHEDM.pptx
 debug
+n1000000-id1.tess.orientations.csv
 
 # C extensions
 *.so
