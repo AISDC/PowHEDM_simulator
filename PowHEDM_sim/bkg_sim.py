@@ -175,12 +175,15 @@ class bkg_sim:
         }
 
 
-    def poisson_noise(self, intensity_arr):
+    def poisson_noise(self, intensity_arr, scale_Imax=None):
         """Create Poisson noise map over the detector.
         Shot noise: Poisson noise is due to the discrete nature of photons.
         """
 
         poisson_noise = np.random.poisson(intensity_arr) - intensity_arr
+
+        if scale_Imax not in [None, "None", "none"]:
+            poisson_noise *= scale_Imax / np.max(np.abs(poisson_noise))
 
         self.poisson_noise = {
             "intensity": poisson_noise,

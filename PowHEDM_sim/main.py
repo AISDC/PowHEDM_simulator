@@ -32,12 +32,12 @@ parser.add_argument("-configFile",
 
 parser.add_argument("-grainFile",
                     type=str,
-                    default="/Users/dbeniwal/ANL-research/github/PowHEDM_simulator/in_grain_files/n1000000-id1.tess.orientations.csv",
+                    default="in_grain_files/n1000000-id1.tess.orientations.csv",
                     help="Path to grain file")
 
 parser.add_argument("-maxFramesPerSim",
                     type=int,
-                    default=1,
+                    default=2,
                     help="Maximum number of omega frames to use per simulation")
 
 parser.add_argument("-clearZarrDump",
@@ -496,7 +496,12 @@ while frame_count < args.nr_frames:
 
 
         if "poisson" in bkg_types:
+            poisson_scale_Imax_list = np.random.uniform(powHEDM_sim_config["bkg"]["poisson"]["scale_Imax"]["min"],
+                                                        powHEDM_sim_config["bkg"]["poisson"]["scale_Imax"]["max"],
+                                                        frames_from_this_sim)
             logging.info(f"\t|Sim {sim_count}: Including poisson noise.")
+        else:
+            poisson_scale_Imax_list = None
 
         if "gaussian" in bkg_types:
             gaussian_scale_Imax_list = np.random.uniform(powHEDM_sim_config["bkg"]["gaussian"]["scale_Imax"]["min"],
@@ -544,7 +549,9 @@ while frame_count < args.nr_frames:
 
             if "poisson" in bkg_types:
                 frame_img_arr = hedm_master[frame_i] + pow_master[frame_i]
-                bkg_sim_i.poisson_noise(intensity_arr=frame_img_arr)
+                bkg_sim_i.poisson_noise(intensity_arr=frame_img_arr,
+                                        scale_Imax=poisson_scale_Imax_list[i])
+                
                 bkg_master[frame_i, :, :] += bkg_sim_i.poisson_noise["intensity"]
 
             if "gaussian" in bkg_types:

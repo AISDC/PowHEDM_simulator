@@ -7,6 +7,8 @@ P_powHEDM.pptx
 n1000000-id1.tess.orientations.csv
 in_grain_files/
 .DS_Store
+debug
+
 
 # C extensions
 *.so
