@@ -5,6 +5,7 @@ __pycache__/
 test.ipynb
 P_powHEDM.pptx
 n1000000-id1.tess.orientations.csv
+in_grain_files/
 
 # C extensions
 *.so
