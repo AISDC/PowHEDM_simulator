@@ -235,7 +235,7 @@ while frame_count < args.nr_frames:
     
 
 
-    frame_sim_lookup.append([[int(sim_count) for i in range(frames_from_this_sim)]])
+    frame_sim_lookup += [int(sim_count) for i in range(frames_from_this_sim)]
 
     frame_BC_Ypx = int(powHEDM_sim_config["detector"]["NrPixels"]/2) + exp_params_frame["BC_Ypx_offset"]
     frame_BC_Zpx = int(powHEDM_sim_config["detector"]["NrPixels"]/2) + exp_params_frame["BC_Zpx_offset"]
@@ -305,7 +305,7 @@ while frame_count < args.nr_frames:
             grains_hedm_mat.to_csv(grains_hedm_mat_savepath, header=False, index=False)
 
 
-            ps_hedm_mat_filepath = os.path.join(ps_dump_dir, f"sim{sim_count}_hedm_{mat}.txt")
+            ps_hedm_mat_filepath = os.path.join(ps_dump_dir, f"sim{sim_count}_hedm_{mat}_{nr_grains_hedm_mat}.txt")
             zarr_hedm_mat_filename = os.path.join(zarr_dump_dir, f"sim{sim_count}_hedm_{mat}")
 
             # =================== WRITE HEADER FILE ===================
@@ -337,6 +337,7 @@ while frame_count < args.nr_frames:
                 f.write(f"OmegaStep {omega_step_hedm}\n")
                 f.write(f"NrPixels {powHEDM_sim_config["detector"]["NrPixels"]}\n")
                 f.write(f"px {powHEDM_sim_config["detector"]["px"]}\n")
+
                 for ring_i in range(1, nrRings+1):
                     ring_thresh = np.random.randint(powHEDM_sim_config["exp_range"]["ring_thresh"]["min"],
                                                     powHEDM_sim_config["exp_range"]["ring_thresh"]["max"] + 1)
@@ -393,7 +394,7 @@ while frame_count < args.nr_frames:
             grains_powder_mat.to_csv(grains_powder_mat_savepath, header=False, index=False)
 
 
-            ps_powder_mat_filepath = os.path.join(ps_dump_dir, f"sim{sim_count}_powder_{mat}.txt")
+            ps_powder_mat_filepath = os.path.join(ps_dump_dir, f"sim{sim_count}_powder_{mat}_{nr_grains_powder_mat}.txt")
             zarr_powder_mat_filename = os.path.join(zarr_dump_dir, f"sim{sim_count}_powder_{mat}")
 
             # =================== WRITE HEADER FILE ===================
@@ -580,7 +581,7 @@ if (args.saveHdf5).lower() in ["y", "yes", "true"]:
         h5file.create_dataset("HEDM", data=hedm_master)
         h5file.create_dataset("Powder", data=pow_master)
         h5file.create_dataset("Background", data=bkg_master)        
-        h5file.create_dataset("frame_sim_lookup", data=frame_sim_lookup)
+        h5file.create_dataset("frame_sim_lookup", data=np.array(frame_sim_lookup))
 
 if (args.saveNpz).lower() in ["y", "yes", "true"]:
     sim_out_npz_filepath = os.path.join(proj_dir, f"powHEDM_frames.npz")
@@ -588,7 +589,8 @@ if (args.saveNpz).lower() in ["y", "yes", "true"]:
     np.savez_compressed(sim_out_npz_filepath, 
                         HEDM=hedm_master, 
                         Powder=pow_master, 
-                        Background=bkg_master)
+                        Background=bkg_master,
+                        frame_sim_lookup=np.array(frame_sim_lookup))
 
 if os.path.exists("SpotMatrixGen.csv"):
     os.remove("SpotMatrixGen.csv")
@@ -596,3 +598,4 @@ if os.path.exists("GrainsGen.csv"):
     os.remove("GrainsGen.csv")
 if os.path.exists("hkls.csv"):
     os.remove("hkls.csv")
+
