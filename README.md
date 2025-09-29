@@ -5,6 +5,7 @@
 
 - **Multi-material simulation**: Supports simulation of multiple crystalline materials simultaneously
 - **Hybrid data generation**: Combines HEDM (single crystal spots) and powder diffraction (continuous rings) patterns
+- **Forward simulation with MIDAS**: Simulates real diffraction patterns using [MIDAS](https://github.com/marinerhemant/MIDAS) forward simulation for actual grain orientations
 - **Realistic backgrounds**: Includes Thomson scattering, Compton scattering, Poisson noise, and Gaussian noise
 - **Materials Project integration**: Automatically retrieves crystal structure data via Materials Project API
 - **Configurable parameters**: Extensive configuration options for experimental conditions
@@ -14,7 +15,7 @@
 
 <ins> **Contents**</ins> :
 - dir: PowHEDM_sim: Contains the classes for simulating powder, HEDM and background data
-- file: PowHEDM_sim/midas_fwsim.py: Contains the class for running the MIDAS forward simulation
+- file: PowHEDM_sim/midas_fwsim.py: Contains the class for running the [MIDAS](https://github.com/marinerhemant/MIDAS) forward simulation
 - file: PowHEDM_sim/mpxrd_sim.py: Contains the class for running the materials project XRD simulation
 - file: PowHEDM_sim/bkg_sim.py: Contains the class for running the background simulation
 - file: PowHEDM_sim/main.py: Main execultion script to run the simulation engine
@@ -36,7 +37,7 @@ Before using this script, ensure you have the following dependencies installed:
 
 <ins> **NOTE** </ins> :
 - A 'default_config.json' file is provided in the root directory. Simulation engine used this by default. For your simulations, modify this file or create a copy of this file (Recommended) with the desired parameters.
-- The MIDAS installation path is hardcoded in the configuration file. Please change the path to the correct path for your system.
+- The [MIDAS](https://github.com/marinerhemant/MIDAS) installation path is hardcoded in the configuration file. Please change the path to the correct path for your system.
 - Make sure you have a valid Materials Project API key. Go to [https://next-gen.materialsproject.org/api] and create an account to get the API key.
 
 <hr />
