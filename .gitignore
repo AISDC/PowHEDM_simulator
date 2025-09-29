@@ -3,7 +3,7 @@ __pycache__/
 *.py[cod]
 *$py.class
 test.ipynb
-in_grain_files
+in_grain_files/
 P_powHEDM.pptx
 
 # C extensions
