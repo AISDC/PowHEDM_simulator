@@ -1,6 +1,8 @@
 # PowHEDM_simulator
  Simulation engine to generate 2D area detector frames with powder and HEDM data
 
+![](docs/sim_frame.png)
+
 - **Multi-material simulation**: Supports simulation of multiple crystalline materials simultaneously
 - **Hybrid data generation**: Combines HEDM (single crystal spots) and powder diffraction (continuous rings) patterns
 - **Realistic backgrounds**: Includes Thomson scattering, Compton scattering, Poisson noise, and Gaussian noise
