@@ -21,6 +21,10 @@ parser.add_argument("-mp_apikey",
                     type=str,
                     help="Materials Project API key")
 
+parser.add_argument("-nr_frames",
+                    type=int,
+                    help="Number of frames to simulate")
+
 parser.add_argument("-configFile",
                     type=str,
                     default="default_config.json",
@@ -30,11 +34,6 @@ parser.add_argument("-grainFile",
                     type=str,
                     default="/Users/dbeniwal/ANL-research/github/PowHEDM_simulator/in_grain_files/n1000000-id1.tess.orientations.csv",
                     help="Path to grain file")
-
-parser.add_argument("-nr_frames",
-                    type=int,
-                    default=4,
-                    help="Number of frames to simulate")
 
 parser.add_argument("-maxFramesPerSim",
                     type=int,
