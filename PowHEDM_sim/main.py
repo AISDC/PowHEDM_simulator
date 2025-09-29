@@ -579,9 +579,9 @@ if (args.saveNpz).lower() in ["y", "yes", "true"]:
     sim_out_npz_filepath = os.path.join(proj_dir, f"powHEDM_frames.npz")
     logging.info(f"Saving frames to npz file at '{sim_out_npz_filepath}'")
     np.savez_compressed(sim_out_npz_filepath, 
-                        hedm=hedm_master, 
-                        powder=pow_master, 
-                        background=bkg_master)
+                        HEDM=hedm_master, 
+                        Powder=pow_master, 
+                        Background=bkg_master)
 
 if os.path.exists("SpotMatrixGen.csv"):
     os.remove("SpotMatrixGen.csv")

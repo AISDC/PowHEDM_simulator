@@ -83,6 +83,25 @@ A default configuration file is provided in the root directory as "default_confi
 
 ## Output
 If the `-saveHdf5` argument is set to `"yes"`, the output will be saved in the project directory as "powHEDM_frames.h5" file.
+It has three keys: "HEDM", "Powder", "Background".
+Loading the hdf5 file and accessing the data is straightforward using h5py.
+
+```python
+import h5py
+with h5py.File("powHEDM_frames.h5", "r") as f:
+    hedm_data = f["HEDM"]
+    powder_data = f["Powder"]
+    background_data = f["Background"]
+```
 
 If the `-saveNpz` argument is set to `"yes"`, the output will be saved in the project directory as "powHEDM_frames.npz" file.
+It has three keys: "HEDM", "Powder", "Background".
+Loading the npz file and accessing the data is straightforward using numpy.
 
+```python
+import numpy as np
+data = np.load("powHEDM_frames.npz")
+hedm_data = data["HEDM"]
+powder_data = data["Powder"]
+background_data = data["Background"]
+```
