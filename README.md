@@ -33,6 +33,7 @@ Before using this script, ensure you have the following dependencies installed:
 - mp_api
 
 <ins> **NOTE** </ins> : The MIDAS installation path is hardcoded in the configuration file. Please change the path to the correct path for your system.
+
 <hr />
 
 Run the powHEDM_sim/main.py script to run the simulation engine.
