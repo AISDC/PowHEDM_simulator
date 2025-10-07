@@ -9,6 +9,9 @@ in_grain_files/
 .DS_Store
 debug
 debug2
+GrainsGen.csv
+SpotMatrixGen.csv
+hkls.csv
 
 
 # C extensions
