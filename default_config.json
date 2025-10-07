@@ -38,18 +38,18 @@
     },
     "hedm_range": {
         "NrGrains": {"min": 500.0, "max": 10000.0},
-        "MaxIntensity": {"min": 1e3, "max": 3e3},
+        "MaxIntensity": {"min": 1e3, "max": 4e3},
         "OmegaStart": {"min": -3, "max": -3},
         "OmegaEnd": {"min": 3, "max": 3},
         "OmegaStep": {"min": 0.25, "max": 0.25}
     },
     "powder_range": {
         "NrGrains": {"min": 1e6, "max": 1e6},
-        "MaxIntensity": {"min": 1e3, "max": 3e3},
+        "MaxIntensity": {"min": 1e3, "max": 4e3},
         "OmegaStart": {"min": -10, "max": 10},
         "OmegaEnd": {"min": -10, "max": 10},
         "OmegaStep": {"min": 2, "max": 2},
-        "scale_max_intensity": {"min": 2000, "max": 4000}
+        "scale_max_intensity": {"min": 2000, "max": 6000}
     },
     "bkg": {
         "thomson": {
