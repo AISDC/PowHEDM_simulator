@@ -42,7 +42,7 @@ parser.add_argument("-mpxrdCacheDir",
 
 parser.add_argument("-clearZarrDump",
                     type=str,
-                    default="no",
+                    default="yes",
                     help="(no-don't clear, yes-clear) Whether to clear the zarr dump directory after simulation")
 
 parser.add_argument("-clearPSDump",
@@ -52,7 +52,7 @@ parser.add_argument("-clearPSDump",
 
 parser.add_argument("-clearGrainDump",
                     type=str,
-                    default="no",
+                    default="yes",
                     help="(no-don't clear, yes-clear) Whether to clear the grain dump directory after simulation")
 
 parser.add_argument("-saveHdf5",
@@ -86,24 +86,15 @@ grain_dump_dir = os.path.join(proj_dir, "grain_dump")
 frame_dump_dir = os.path.join(proj_dir, "frame_dump")
 
 if os.path.exists(proj_dir):
-    dir_reset = input(f"Output directory '{proj_dir}' already exists. Continuing will reset the directory. Continue? (y/n): ")
-    if dir_reset.lower() in ["y", "yes"]:
-        shutil.rmtree(proj_dir)
-        os.makedirs(proj_dir)
-        os.makedirs(zarr_dump_dir)
-        os.makedirs(ps_dump_dir)
-        os.makedirs(grain_dump_dir)
-        os.makedirs(frame_dump_dir)
-    else:
-        print("Exiting program.")
-        exit()
+    shutil.rmtree(proj_dir)
+    print(f"DELETED EXISTING PROJECT DIRECTORY: '{proj_dir}'")
 
-else:
-    os.makedirs(proj_dir)
-    os.makedirs(zarr_dump_dir)
-    os.makedirs(ps_dump_dir)
-    os.makedirs(grain_dump_dir)
-    os.makedirs(frame_dump_dir)
+os.makedirs(proj_dir)
+os.makedirs(zarr_dump_dir)
+os.makedirs(ps_dump_dir)
+os.makedirs(grain_dump_dir)
+os.makedirs(frame_dump_dir)
+
     
 print("Created output directory: ", proj_dir)
 print("Created dump directory for zarr files: ", zarr_dump_dir)
@@ -617,16 +608,15 @@ while frame_count <= args.nr_frames:
                 if os.path.exists(file): os.remove(file)
 
 
+    if os.path.exists("SpotMatrixGen.csv"):
+        os.remove("SpotMatrixGen.csv")
+    if os.path.exists("GrainsGen.csv"):
+        os.remove("GrainsGen.csv")
+    if os.path.exists("hkls.csv"):
+        os.remove("hkls.csv")
+
+
 logging.info("\n\n")
 logging.info("="*30)
 logging.info("SIMULATION COMPLETE.")
 logging.info("="*30)
-
-if os.path.exists("SpotMatrixGen.csv"):
-    os.remove("SpotMatrixGen.csv")
-if os.path.exists("GrainsGen.csv"):
-    os.remove("GrainsGen.csv")
-if os.path.exists("hkls.csv"):
-    os.remove("hkls.csv")
-
-
