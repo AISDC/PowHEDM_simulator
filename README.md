@@ -18,9 +18,12 @@
 - file: PowHEDM_sim/midas_fwsim.py: Contains the class for running the [MIDAS](https://github.com/marinerhemant/MIDAS) forward simulation
 - file: PowHEDM_sim/mpxrd_sim.py: Contains the class for running the materials project XRD simulation
 - file: PowHEDM_sim/bkg_sim.py: Contains the class for running the background simulation
-- file: PowHEDM_sim/main.py: Main execultion script to run the simulation engine
+- file: PowHEDM_sim/run_powHEDM_sim.py: Main execultion script to run the simulation engine
+- file: PowHEDM_sim/create_mpxrd_cache.py: Creates materials project xrd simulation cache
 - file: default_config.json: Contains the default configuration for the simulation engine
 - dir: in_grain_files: Contains the grain orientations file for the simulation. It can be downloaded from [https://anl.box.com/s/3s600lzbj0hfoxmdfw1ha671rk9cw4ro]
+- dir: mpxrd_cache: Contains the xrd simulations from Materials project. Each material has an hkl file and an info file associated with it.
+
 <hr />
 
 <ins> **Prerequisites**</ins> :
@@ -38,18 +41,25 @@ Before using this script, ensure you have the following dependencies installed:
 <ins> **NOTE** </ins> :
 - A 'default_config.json' file is provided in the root directory. Simulation engine used this by default. For your simulations, modify this file or create a copy of this file (Recommended) with the desired parameters.
 - The [MIDAS](https://github.com/marinerhemant/MIDAS) installation path is hardcoded in the configuration file. Please change the path to the correct path for your system.
-- Make sure you have a valid Materials Project API key. Go to [https://next-gen.materialsproject.org/api] and create an account to get the API key.
+- Make sure you have a valid Materials Project API key. Go to [https://next-gen.materialsproject.org/api] and create an account to get the API key. This will be needed to generate XRD simulation if the material data is not already available in mpxrd_cache.
 
 <hr />
 
-Run the powHEDM_sim/main.py script to run the simulation engine.
+Run the powHEDM_sim/run_powHEDM_sim.py script to run the simulation engine.
 
 ```bash
-python PowHEDM_sim/main.py \
+python PowHEDM_sim/run_powHEDM_sim.py \
     -projName <project_name> \
     -mp_apikey <materials_project_api_key> \
     -nr_frames <number_of_frames>
 ```
+
+To generate the materials project cache, run the powHEDM_sim/create_mpxrd_cache.py
+```bash
+python PowHEDM_sim/create_mpxrd_cache.py \
+    -mp_apikey <materials_project_api_key> \
+```
+
 
 ## Command Line Arguments
 
@@ -67,9 +77,8 @@ python PowHEDM_sim/main.py \
 |----------|------|---------|-------------|
 | `-configFile` | `str` | `"default_config.json"` | Path to configuration file |
 | `-grainFile` | `str` | `"in_grain_files/n1000000-id1.tess.orientations.csv"` | Path to grain orientations file |
-| `-maxFramesPerSim` | `int` | `1` | Maximum omega frames per simulation |
+| `-mpxrdCacheDir` | `str` | `"mpxrd_cache"` | Directory that contains the materials project cache |
 | `-clearZarrDump` | `str` | `"yes"` | Clear zarr dump directory after simulation (`"yes"`/`"no"`) |
-| `-clearHKLDump` | `str` | `"yes"` | Clear HKL dump directory after simulation (`"yes"`/`"no"`) |
 | `-clearPSDump` | `str` | `"no"` | Clear parameter dump directory after simulation (`"yes"`/`"no"`) |
 | `-clearGrainDump` | `str` | `"yes"` | Clear grain dump directory after simulation (`"yes"`/`"no"`) |
 | `-saveHdf5` | `str` | `"no"` | Save output as HDF5 file (`"yes"`/`"no"`) |
@@ -84,7 +93,6 @@ The configuration file is a JSON file that contains the configuration for the si
 A default configuration file is provided in the root directory as "default_config.json".
 
 
-
 <hr />
 
 ## Output
@@ -94,7 +102,13 @@ Loading the hdf5 file and accessing the data is straightforward using h5py.
 
 ```python
 import h5py
-h5data = h5py.File("powHEDM_frames.h5")
+import os
+
+proj_dir = "path-to-proj-dir"
+frame_idx = 1 #frame number to be loaded
+
+frame_h5_path = os.path.join(proj_dir, "frame_dump", f"frame_{frame_idx}.h5")
+h5data = h5py.File(frame_h5_path)
 hedm_data = f["HEDM"]
 powder_data = f["Powder"]
 background_data = f["Background"]
@@ -106,7 +120,13 @@ Loading the npz file and accessing the data is straightforward using numpy.
 
 ```python
 import numpy as np
-data = np.load("powHEDM_frames.npz")
+import os
+
+proj_dir = "path-to-proj-dir"
+frame_idx = 1 #frame number to be loaded
+
+frame_npz_path = os.path.join(proj_dir, "frame_dump", f"frame_{frame_idx}.npz")
+data = np.load(frame_npz_path)
 hedm_data = data["HEDM"]
 powder_data = data["Powder"]
 background_data = data["Background"]
