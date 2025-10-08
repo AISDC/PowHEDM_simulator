@@ -322,7 +322,7 @@ while frame_count <= args.nr_frames:
                     f.write(f"IntensitiesFile {hkls_mat_filepath}\n")
                     f.write(f"OutFileName {zarr_hedm_mat_filename}\n")
                     f.write(f"LatticeConstant {lattice_params}\n")
-                    f.write(f"SpaceGroup {mpxrd_info_mat_dict["SPACE_GROUP"]}\n")
+                    f.write(f"SpaceGroup {mpxrd_info_mat_dict['SPACE_GROUP']}\n")
                     f.write(f"Wavelength {exp_params_frame['Wavelength']}\n")
                     f.write(f"Lsd {exp_params_frame['Lsd']}\n")
                     f.write(f"BC {frame_BC_Ypx} {frame_BC_Zpx}\n")
@@ -342,8 +342,8 @@ while frame_count <= args.nr_frames:
                     f.write(f"OmegaStart {omega_start_hedm}\n")
                     f.write(f"OmegaEnd {omega_end_hedm}\n")
                     f.write(f"OmegaStep {omega_step_hedm}\n")
-                    f.write(f"NrPixels {powHEDM_sim_config["detector"]["NrPixels"]}\n")
-                    f.write(f"px {powHEDM_sim_config["detector"]["px"]}\n")
+                    f.write(f"NrPixels {powHEDM_sim_config['detector']['NrPixels']}\n")
+                    f.write(f"px {powHEDM_sim_config['detector']['px']}\n")
 
                     for ring_i in range(1, nrRings+1):
                         ring_thresh = np.random.randint(powHEDM_sim_config["exp_range"]["ring_thresh"]["min"],
@@ -417,7 +417,7 @@ while frame_count <= args.nr_frames:
                     f.write(f"IntensitiesFile {hkls_mat_filepath}\n")
                     f.write(f"OutFileName {zarr_powder_mat_filename}\n")
                     f.write(f"LatticeConstant {lattice_params}\n")
-                    f.write(f"SpaceGroup {mpxrd_info_mat_dict["SPACE_GROUP"]}\n")
+                    f.write(f"SpaceGroup {mpxrd_info_mat_dict['SPACE_GROUP']}\n")
                     f.write(f"Wavelength {exp_params_frame['Wavelength']}\n")
                     f.write(f"Lsd {exp_params_frame['Lsd']}\n")
                     f.write(f"BC {frame_BC_Ypx} {frame_BC_Zpx}\n")
@@ -437,8 +437,8 @@ while frame_count <= args.nr_frames:
                     f.write(f"OmegaStart {omega_start_powder}\n")
                     f.write(f"OmegaEnd {omega_end_powder}\n")
                     f.write(f"OmegaStep {omega_step_powder}\n")
-                    f.write(f"NrPixels {powHEDM_sim_config["detector"]["NrPixels"]}\n")
-                    f.write(f"px {powHEDM_sim_config["detector"]["px"]}\n")
+                    f.write(f"NrPixels {powHEDM_sim_config['detector']['NrPixels']}\n")
+                    f.write(f"px {powHEDM_sim_config['detector']['px']}\n")
                     for ring_i in range(1, nrRings+1):
                         ring_thresh = np.random.randint(powHEDM_sim_config["exp_range"]["ring_thresh"]["min"],
                                                         powHEDM_sim_config["exp_range"]["ring_thresh"]["max"] + 1)

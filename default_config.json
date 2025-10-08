@@ -1,5 +1,5 @@
 {
-    "MIDAS_INSTALL_PATH": "/Users/dbeniwal/MIDAS/",
+    "MIDAS_INSTALL_PATH": "/homes/xma/MIDAS/",
     "materials_pool": {
         "oxides": [
             "SiO2", "Li2O", "Al2O3", "TiO2", "CeO2", "ZrO2", "NiO", "Fe2O3"
