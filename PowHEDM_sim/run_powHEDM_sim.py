@@ -607,13 +607,29 @@ while frame_count <= args.nr_frames:
             for file in frame_files_created:
                 if os.path.exists(file): os.remove(file)
 
+    try:
+        if os.path.exists("SpotMatrixGen.csv"):
+            os.remove("SpotMatrixGen.csv")
+    except:
+        pass
 
-    if os.path.exists("SpotMatrixGen.csv"):
-        os.remove("SpotMatrixGen.csv")
-    if os.path.exists("GrainsGen.csv"):
-        os.remove("GrainsGen.csv")
-    if os.path.exists("hkls.csv"):
-        os.remove("hkls.csv")
+    try:
+        if os.path.exists("GrainsGen.csv"):
+            os.remove("GrainsGen.csv")
+    except:
+        pass
+    
+    try:   
+        if os.path.exists("GrainsGen.csv"):
+            os.remove("GrainsGen.csv")
+    except:
+        pass
+
+    try:
+        if os.path.exists("hkls.csv"):
+            os.remove("hkls.csv")
+    except:
+        pass
 
 
 logging.info("\n\n")
