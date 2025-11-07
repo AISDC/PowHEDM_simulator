@@ -77,6 +77,12 @@ with open(sim_config_filepath, 'r') as f:
     powHEDM_sim_config = json.load(f)
 print("DONE.")
 
+if not os.path.exists(powHEDM_sim_config["MIDAS_INSTALL_PATH"]):
+    print(f"MIDAS path: {powHEDM_sim_config['MIDAS_INSTALL_PATH']}")
+    print(f"MIDAS installation path is not valid. Check declared path in the config file. Exiting...")
+    exit(1)
+else:
+    print(f"MIDAS installation path is valid. Continuing...")
 
 cwd = pathlib.Path(os.getcwd())
 proj_dir = os.path.join(cwd, args.projName)
@@ -235,6 +241,7 @@ while frame_count <= args.nr_frames:
                                 i.endswith("info.txt") and i.split("_")[0] == mat][0]
 
             mpxrd_info_mat_filepath = os.path.join(mpxrd_cache_dir, mpxrd_info_mat_filename)
+            logging.info(f"\t|info file found at: {mpxrd_info_mat_filepath}")
             mpxrd_info_mat_dict = {}
 
             with open(mpxrd_info_mat_filepath, "r") as f:

@@ -25,7 +25,7 @@ class midas_fwsim:
     def run_midas_forward_sim(self):
         cmd = [os.path.join(self.MIDAS_INSTALL_PATH, f"FF_HEDM{SEP}bin{SEP}ForwardSimulationCompressed"), self.ps_filepath, str(self.ncpu)]
         cmd = " ".join(cmd)
-        
+        print("Running command: ", cmd)
         outfile_path = os.path.join(self.out_dir, "hedm_fwsim_out.txt")
         errfile_path = os.path.join(self.out_dir, "hedm_fwsim_err.txt")
         with open(outfile_path, 'w') as outfile, open(errfile_path, 'w') as errfile:
